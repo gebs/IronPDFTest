@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IronPdf;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IronPDFTest.Controllers
 {
@@ -25,17 +26,17 @@ namespace IronPDFTest.Controllers
 </body>
 </html>";
         [HttpGet]
-        public ActionResult GetPassengerPDF(
-             [FromServices] IPDFGenerator renderer
-            )
+        public ActionResult PDF()
         {
-            var pdf = renderer.CreatePDF(html);
+            var renderer = new HtmlToPdf();
+            var pdf = renderer.RenderHtmlAsPdf(html);
+
             if (pdf == null)
             {
                 return NotFound();
             }
 
-            return File(pdf, "application/pdf", "Test.pdf");
+            return File(pdf.BinaryData, "application/pdf", "Test.pdf");
 
         }
 

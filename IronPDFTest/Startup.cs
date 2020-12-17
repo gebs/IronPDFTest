@@ -20,8 +20,6 @@ namespace IronPDFTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<HtmlToPdf>()
-                .AddSingleton<IPDFGenerator, IronPDFGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
